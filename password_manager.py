@@ -1,0 +1,37 @@
+from cryptography.fernet import Fernet
+key = Fernet.generate_key()
+
+master_pwd = input("Enter master password: ")
+
+
+def add():
+
+    name = input("ACCOUNT:")
+    pwd = input("PASSWORD:")
+    with open('password.txt', 'a') as f:
+        f.write(f'{name}|{pwd}\n')
+
+def view():
+    with open('password.txt', 'r') as f:
+        for line in f.readlines():
+            data = line.strip()
+            user, passw = data.split('|')
+            print("ACCOUNT:", user, "PASSWORD:", passw)
+
+
+while True:
+    mode = input("What would you like to do? add, view or quit(q)").lower()
+
+    if mode == "q":
+        quit()
+
+    elif mode == "add":
+        add()
+
+    elif mode == "view":
+        view()
+
+    else:
+        print("INVALID MODE.")
+        continue
+        
